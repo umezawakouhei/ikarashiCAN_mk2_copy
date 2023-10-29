@@ -1,3 +1,4 @@
+/*
 #include "mbed.h"
 #include "ikarashiCAN_mk2.h"
 #include <button_state.h>
@@ -57,3 +58,4 @@ void main_update()
         can1.set_this_id(target_id % 10 + 1);
     }
 }
+*/
