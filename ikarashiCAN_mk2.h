@@ -11,6 +11,16 @@
 #ifndef IKARASHICAN_MK2
 #define IKARASHICAN_MK2
 
+typedef union canenc {
+    struct {
+        int16_t pulse_a[3];
+        uint8_t limit_a[2];
+        int16_t pulse_m[3];
+        uint8_t limit_m[2];
+    }__attribute__((packed));
+    uint8_t data[16];
+}__attribute__((packed));
+
 /**
  * @brief CANのフィルター用のクラス
  * @note mbedのCANフィルターが使いにくすぎたから、halで実装した。
@@ -169,6 +179,8 @@ public:
      */
     void read_start();
 
+    int get_ume(union canenc* _canr);
+
 private:
     CAN can;
     CANMessage msg;
@@ -183,6 +195,8 @@ private:
     /// 送信するデータの配列
     uint8_t sender[64];
     size_t sender_len;
+
+    union canenc canr;
 
     void read_for_attach();
 };
